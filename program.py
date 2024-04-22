@@ -6,8 +6,6 @@ import os
 import sys
 
 
-
-
 EXTENTIONS = {".json", ".yml", ".yaml", ".xml"}
 
 
@@ -82,7 +80,8 @@ def save(filePath, dic):
             with open(filePath, "w") as stream:
                 stream.write(yaml.dumps(dic))
         elif fileExt == ".xml":
-            print("placeholder")
+            with open(filePath, "w") as stream:
+                stream.write(dicttoxml(dic))
         else:
             exit("Nieznane rozszerzenie.")
     except:
