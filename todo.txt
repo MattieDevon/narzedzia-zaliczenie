@@ -1,0 +1,7 @@
+- Task1: parsowanie argumentów przekazywanych przy uruchomieniu programu
+- Task2: wczytywanie do obiektu z pliku .json i weryfikacja poprawności składni pliku
+- Task3: zapis danych z obiektu do pliku w formacie i zgodnie ze składnią .json
+- Task4: wczytywanie do obiektu z pliku .yml i weryfikacja poprawności składni pliku
+- Task5: zapis danych z obiektu do pliku w formacie i zgodnie ze składnią .yml
+- Task6: wczytywanie do obiektu z pliku .xml i weryfikacja poprawności składni pliku
+- Task7: zapis danych z obiektu do pliku w formacie i zgodnie ze składnią .xml
