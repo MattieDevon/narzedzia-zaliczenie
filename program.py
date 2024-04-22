@@ -63,18 +63,20 @@ def load(filePath):
         print("placeholder")
     else:
         exit("Nieznane rozszerzenie.")
+    print("odczyt zakończony sukcesem")
 
 def save(filePath, thing):
     fileExt = os.path.splitext(filePath)[1]
     if fileExt == ".json":
         with open(filePath, "w") as file:
-            file.write(thing)
+            file.write(json.dumps(thing))
     elif fileExt == ".yml" or fileExt == ".yaml":
         print("placeholder")
     elif fileExt == ".xml":
         print("placeholder")
     else:
         exit("Nieznane rozszerzenie.")
+    print("zapis zakończony sukcesem")
 
 
 def main():
@@ -94,5 +96,5 @@ def test():
     verify("plik1","plik2")
 
 if __name__ == '__main__':
-    #main()
-    test()
+    main()
+    #test()
