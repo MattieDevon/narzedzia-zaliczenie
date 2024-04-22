@@ -1,4 +1,5 @@
 import json
+import yaml
 import os
 import sys
 
@@ -52,13 +53,14 @@ def load(filePath):
 
     if fileExt == ".json":
         try:
-            with open(filePath, "r") as file:
-                return json.load(file)
+            with open(filePath, "r") as stream:
+                return json.load(stream)
         except:
             pass
 
     elif fileExt == ".yml" or fileExt == ".yaml":
-        print("placeholder")
+        with open(filePath, "r") as stream:
+            return yaml.safe_load(stream)
     elif fileExt == ".xml":
         print("placeholder")
     else:
