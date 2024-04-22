@@ -67,7 +67,8 @@ def load(filePath):
 def save(filePath, thing):
     fileExt = os.path.splitext(filePath)[1]
     if fileExt == ".json":
-        
+        with open(filePath, "w") as file:
+            file.write(thing)
     elif fileExt == ".yml" or fileExt == ".yaml":
         print("placeholder")
     elif fileExt == ".xml":
