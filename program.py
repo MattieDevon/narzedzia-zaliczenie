@@ -14,7 +14,6 @@ def verify(readPath, writePath):
     if readPath == writePath:
         exit("BARDZO ŚMIESZNE")
 
-    print(os.path.splitext(readPath)[1])
     if (os.path.splitext(readPath)[1] in EXTENTIONS) == False:
         exit("Nie obsługiwane rozszerzenie pliku wejściowego")
 
@@ -42,8 +41,8 @@ def verify(readPath, writePath):
                     break
                 if inValue == "n" or inValue == "N":
                     exit("Program zatrzymany przez użytkownika")
-                if os.access(writePath, os.W_OK):
-                    print("WRITE OK")
+            if os.access(writePath, os.W_OK):
+                print("WRITE OK")
     except PermissionError:
         print("Błąd: Nie można zapisać do \"" + writePath + "\" ")
 
@@ -72,20 +71,19 @@ def load(filePath):
 
 def save(filePath, dic):
     fileExt = os.path.splitext(filePath)[1]
-    try:
-        if fileExt == ".json":
-            with open(filePath, "w") as stream:
-                stream.write(json.dumps(dic))
-        elif fileExt == ".yml" or fileExt == ".yaml":
-            with open(filePath, "w") as stream:
-                stream.write(yaml.dumps(dic))
-        elif fileExt == ".xml":
-            with open(filePath, "w") as stream:
-                stream.write(dicttoxml(dic))
-        else:
-            exit("Nieznane rozszerzenie.")
-    except:
-        exit("Błąd zapisu")
+
+    if fileExt == ".json":
+        with open(filePath, "w") as stream:
+            stream.write(json.dumps(dic))
+    elif fileExt == ".yml" or fileExt == ".yaml":
+        with open(filePath, "w") as stream:
+            yaml.dump(dic,stream)
+    elif fileExt == ".xml":
+        with open(filePath, "wb") as stream:
+            stream.write(dicttoxml.dicttoxml(dic))
+    else:
+        exit("Nieznane rozszerzenie.")
+
     print("zapis zakończony sukcesem")
 
 
