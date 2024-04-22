@@ -1,7 +1,10 @@
 import json
 import yaml
+import xmltodict
+import dicttoxml
 import os
 import sys
+
 
 
 
@@ -62,7 +65,8 @@ def load(filePath):
         with open(filePath, "r") as stream:
             dic = yaml.safe_load(stream)
     elif fileExt == ".xml":
-        print("placeholder")
+        with open(filePath, "r") as stream:
+            dic = xmltodict.parse(stream.read())
     else:
         exit("Nieznane rozszerzenie.")
     print("odczyt zakończony sukcesem")
