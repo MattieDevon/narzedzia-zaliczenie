@@ -54,30 +54,35 @@ def load(filePath):
     if fileExt == ".json":
         try:
             with open(filePath, "r") as stream:
-                return json.load(stream)
+                dic = json.load(stream)
         except:
             pass
 
     elif fileExt == ".yml" or fileExt == ".yaml":
         with open(filePath, "r") as stream:
-            return yaml.safe_load(stream)
+            dic = yaml.safe_load(stream)
     elif fileExt == ".xml":
         print("placeholder")
     else:
         exit("Nieznane rozszerzenie.")
     print("odczyt zakończony sukcesem")
+    return dic
 
-def save(filePath, thing):
+def save(filePath, dic):
     fileExt = os.path.splitext(filePath)[1]
-    if fileExt == ".json":
-        with open(filePath, "w") as file:
-            file.write(json.dumps(thing))
-    elif fileExt == ".yml" or fileExt == ".yaml":
-        print("placeholder")
-    elif fileExt == ".xml":
-        print("placeholder")
-    else:
-        exit("Nieznane rozszerzenie.")
+    try:
+        if fileExt == ".json":
+            with open(filePath, "w") as stream:
+                stream.write(json.dumps(dic))
+        elif fileExt == ".yml" or fileExt == ".yaml":
+            with open(filePath, "w") as stream:
+                stream.write(yaml.dumps(dic))
+        elif fileExt == ".xml":
+            print("placeholder")
+        else:
+            exit("Nieznane rozszerzenie.")
+    except:
+        exit("Błąd zapisu")
     print("zapis zakończony sukcesem")
 
 
@@ -89,8 +94,8 @@ def main():
     path1 = sys.argv[1]
     path2 = sys.argv[2]
     verify(path1, path2)
-    foo = load(path1)
-    save(filePath=path2, thing=foo)
+    dic = load(path1)
+    save(filePath=path2, dic=dic)
 
 
 
