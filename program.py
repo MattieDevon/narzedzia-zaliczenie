@@ -1,5 +1,7 @@
+import json
 import os
 import sys
+
 
 
 EXTENTIONS = {".json", ".yml", ".yaml", ".xml"}
@@ -44,6 +46,36 @@ def verify(readPath, writePath):
         print("Błąd: Nie można zapisać do \"" + writePath + "\" ")
 
 
+def load(filePath):
+
+    fileExt = os.path.splitext(filePath)[1]
+
+    if fileExt == ".json":
+        try:
+            with open(filePath, "r") as file:
+                return json.load(file)
+        except:
+            pass
+
+    elif fileExt == ".yml" or fileExt == ".yaml":
+        print("placeholder")
+    elif fileExt == ".xml":
+        print("placeholder")
+    else:
+        exit("Nieznane rozszerzenie.")
+
+def save(filePath, thing):
+    fileExt = os.path.splitext(filePath)[1]
+    if fileExt == ".json":
+        
+    elif fileExt == ".yml" or fileExt == ".yaml":
+        print("placeholder")
+    elif fileExt == ".xml":
+        print("placeholder")
+    else:
+        exit("Nieznane rozszerzenie.")
+
+
 def main():
     #weryfikacja argumentów
     if len(sys.argv) != 3:
@@ -51,8 +83,9 @@ def main():
         exit()
     path1 = sys.argv[1]
     path2 = sys.argv[2]
-    verify()
-
+    verify(path1, path2)
+    foo = load(path1)
+    save(filePath=path2, thing=foo)
 
 
 
