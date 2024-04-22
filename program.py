@@ -1,3 +1,7 @@
+import json
+import yaml
+import xmltodict
+import dicttoxml
 import os
 import sys
 
@@ -44,6 +48,47 @@ def verify(readPath, writePath):
         print("Błąd: Nie można zapisać do \"" + writePath + "\" ")
 
 
+def load(filePath):
+
+    fileExt = os.path.splitext(filePath)[1]
+
+    if fileExt == ".json":
+        try:
+            with open(filePath, "r") as stream:
+                dic = json.load(stream)
+        except:
+            pass
+
+    elif fileExt == ".yml" or fileExt == ".yaml":
+        with open(filePath, "r") as stream:
+            dic = yaml.safe_load(stream)
+    elif fileExt == ".xml":
+        with open(filePath, "r") as stream:
+            dic = xmltodict.parse(stream.read())
+    else:
+        exit("Nieznane rozszerzenie.")
+    print("odczyt zakończony sukcesem")
+    return dic
+
+def save(filePath, dic):
+    fileExt = os.path.splitext(filePath)[1]
+    try:
+        if fileExt == ".json":
+            with open(filePath, "w") as stream:
+                stream.write(json.dumps(dic))
+        elif fileExt == ".yml" or fileExt == ".yaml":
+            with open(filePath, "w") as stream:
+                stream.write(yaml.dumps(dic))
+        elif fileExt == ".xml":
+            with open(filePath, "w") as stream:
+                stream.write(dicttoxml(dic))
+        else:
+            exit("Nieznane rozszerzenie.")
+    except:
+        exit("Błąd zapisu")
+    print("zapis zakończony sukcesem")
+
+
 def main():
     #weryfikacja argumentów
     if len(sys.argv) != 3:
@@ -51,8 +96,9 @@ def main():
         exit()
     path1 = sys.argv[1]
     path2 = sys.argv[2]
-    verify()
-
+    verify(path1, path2)
+    dic = load(path1)
+    save(filePath=path2, dic=dic)
 
 
 
@@ -60,5 +106,5 @@ def test():
     verify("plik1","plik2")
 
 if __name__ == '__main__':
-    #main()
-    test()
+    main()
+    #test()
