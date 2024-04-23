@@ -41,8 +41,8 @@ def verify(readPath, writePath):
                     break
                 if inValue == "n" or inValue == "N":
                     exit("Program zatrzymany przez użytkownika")
-            if os.access(writePath, os.W_OK):
-                print("WRITE OK")
+        if os.access(writePath, os.W_OK):
+            print("WRITE OK")
     except PermissionError:
         print("Błąd: Nie można zapisać do \"" + writePath + "\" ")
 
