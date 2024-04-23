@@ -1,6 +1,6 @@
 #!/bin/bash
 
-py -m pip install "pyinstaller"
-py -m pip install pyyaml
-py -m pip install xmltodict
-py -m pip install dicttoxml
+pip install pyinstaller
+pip install pyyaml
+pip install xmltodict
+pip install dicttoxml
